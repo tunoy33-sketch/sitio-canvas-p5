@@ -27,19 +27,6 @@ python -m http.server 8000
 # abrir http://localhost:8000
 ```
 
-### Alternativa con Git
-
-```bash
-git init
-git add .
-git commit -m "Sitio web con dibujos en p5.js"
-git branch -M main
-git remote add origin https://github.com/TU-USUARIO/sitio-canvas-p5.git
-git push -u origin main
-```
-
-
-
 ## Dependencias
 
 p5.js 1.9.4
