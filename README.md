@@ -27,24 +27,6 @@ python -m http.server 8000
 # abrir http://localhost:8000
 ```
 
-## Publicar en GitHub Pages (sin instalar nada)
-
-1. Entra a https://github.com e inicia sesión (o crea una cuenta gratuita).
-2. Arriba a la derecha pulsa **+ → New repository**.
-3. En *Repository name* escribe un nombre sin espacios, por ejemplo `sitio-canvas-p5`.
-4. Marca **Public**. No marques "Add a README" (ya tienes uno). Pulsa **Create repository**.
-5. En la página del repositorio vacío pulsa el enlace **uploading an existing file**.
-6. En tu computadora **extrae el ZIP** y abre la carpeta. Selecciona **todo su contenido** (`index.html`, las demás
-   páginas, `css`, `js` y `README.md`) y arrástralo a la ventana de GitHub. No subas el ZIP sin extraer ni
-   una carpeta contenedora: `index.html` debe quedar en la raíz del repositorio.
-7. Espera a que terminen de cargar todos los archivos y pulsa **Commit changes**.
-8. Ve a **Settings → Pages**. En *Build and deployment → Source* elige **Deploy from a branch**; en *Branch*
-   elige `main` y la carpeta `/ (root)`; pulsa **Save**.
-9. Espera de uno a tres minutos y recarga la página de Pages. Aparecerá la URL:
-   `https://TU-USUARIO.github.io/sitio-canvas-p5/`. Ábrela y revisa que se vea el menú, los cinco dibujos y el
-   DOM Inspector.
-10. Esa URL es lo que debes entregar.
-
 ### Alternativa con Git
 
 ```bash
@@ -56,9 +38,8 @@ git remote add origin https://github.com/TU-USUARIO/sitio-canvas-p5.git
 git push -u origin main
 ```
 
-Después sigue desde el paso 8.
+
 
 ## Dependencias
 
-p5.js 1.9.4, cargada desde cdnjs en las páginas que dibujan. No hay nada que instalar; el sitio necesita
-conexión a internet para descargar p5.js.
+p5.js 1.9.4
