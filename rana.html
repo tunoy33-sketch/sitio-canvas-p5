@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rana | Canvas y p5.js</title>
+  <meta name="description" content="Dibujo de una rana hecho con p5.js, adaptado desde Khan Academy.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Canvas <span>&amp;</span> p5.js</a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="menu">☰ Menú</button>
+    <nav id="menu" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="dientes-conejo.html">Dientes de conejo</a></li>
+        <li><a href="cena.html">¿Qué hay de cena?</a></li>
+        <li><a href="dia-nevado.html">Día nevado soleado</a></li>
+        <li><a href="muneco-nieve.html">Muñeco de nieve</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="pagina-rana">
+    <h2>🐸 1. Rana</h2>
+    <p class="lead">El primer reto de Khan Academy: una rana de boca grande construida solo con elipses y dos cuadrados.</p>
+
+    <div class="estudio">
+      <figure class="codigo">
+        <figcaption>Código (p5.js)</figcaption>
+<pre><code>function setup() {
+  createCanvas(400, 400).parent('lienzo');
+  background(255);
+
+  var x = 200;
+  var y = 250;
+
+  noStroke();
+  fill(30, 204, 91); // a nice froggy green!
+
+  ellipse(x, y, 200, 100); // face
+  ellipse(x - 50, y - 50, 40, 40); // left eye socket
+  ellipse(x + 50, y - 50, 40, 40); // right eye socket
+
+  fill(0, 0, 0);
+  ellipse(x, y, 100, 60);
+
+  fill(255, 255, 255); // for the whites of the eyes!
+  ellipse(x - 50, y - 50, 30, 30); // left eyeball
+  ellipse(x + 50, y - 50, 30, 30); // right eyeball
+  fill(0, 0, 0);
+  rect(x + 53, y - 55, 10, 10);
+  rect(x - 64, y - 55, 10, 10);
+}</code></pre>
+      </figure>
+      <div id="lienzo" class="lienzo"></div>
+    </div>
+
+    <section>
+      <h3>Cómo está hecho</h3>
+      <p>
+        El dibujo se apoya en dos variables, <code>x</code> y <code>y</code>, que fijan el centro de la cara.
+        Todas las demás figuras se colocan en relación con ellas (por ejemplo, <code>x - 50</code> y
+        <code>y - 50</code> para el ojo izquierdo), de modo que para mover la rana completa basta con cambiar
+        esos dos números. <code>noStroke()</code> elimina el contorno de todas las figuras y
+        <code>fill(30, 204, 91)</code> fija el verde con el que se pintan la cara y las dos cuencas de los ojos.
+        Después se cambia el relleno a negro para la boca (una elipse de 100 por 60) y a blanco para los globos
+        oculares; por último, de nuevo en negro, dos cuadrados de 10 píxeles hacen las pupilas. El orden importa
+        porque cada figura se pinta encima de la anterior.
+      </p>
+      <p>
+        Respecto al simulador de Khan Academy solo se agregó lo que este implementaba por su cuenta:
+        <code>setup()</code> para encerrar el dibujo, <code>createCanvas(400, 400)</code> para crear el lienzo
+        dentro del <code>&lt;div id="lienzo"&gt;</code> y <code>background(255)</code> para que el fondo sea
+        blanco, ya que el fondo por omisión de p5.js es gris.
+      </p>
+      <p class="enlaces"><a href="js/sketches/rana.js">Ver el archivo del dibujo (rana.js)</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Brian Jair Camacho Rodríguez · Proyecto de HTML, CSS y JavaScript · 2026</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sketches/rana.js"></script>
+</body>
+</html>

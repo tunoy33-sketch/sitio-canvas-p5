@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teoría: p5.js | Canvas y p5.js</title>
+  <meta name="description" content="Fundamentos de la biblioteca p5.js para crear dibujos y animaciones interactivas.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Canvas <span>&amp;</span> p5.js</a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="menu">☰ Menú</button>
+    <nav id="menu" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="dientes-conejo.html">Dientes de conejo</a></li>
+        <li><a href="cena.html">¿Qué hay de cena?</a></li>
+        <li><a href="dia-nevado.html">Día nevado soleado</a></li>
+        <li><a href="muneco-nieve.html">Muñeco de nieve</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="pagina-teoria-p5">
+    <h2>Fundamentos de p5.js</h2>
+    <p class="lead">La biblioteca que convierte el canvas en una herramienta cómoda para la programación creativa.</p>
+
+    <section id="que-es">
+      <h3>¿Qué es p5.js?</h3>
+      <p>
+        p5.js es una biblioteca de JavaScript de código abierto para programación creativa. Fue iniciada por
+        Lauren Lee McCarthy en 2013 y se inspira en Processing, el entorno creado por Casey Reas y Ben Fry en
+        2001 para enseñar programación a artistas y diseñadores. Hoy la mantiene la Processing Foundation junto
+        con una amplia comunidad. Su objetivo es que dibujar, animar y reaccionar a la interacción del usuario
+        requiera muy pocas líneas de código, sin necesidad de dominar la API de bajo nivel del navegador. Para
+        usarla basta con cargar el archivo de la biblioteca antes del script propio; este sitio la toma de una
+        red de distribución de contenido (CDN) en su versión 1.9.4:
+      </p>
+      <pre><code>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/sketches/rana.js"&gt;&lt;/script&gt;</code></pre>
+    </section>
+
+    <section id="setup-draw">
+      <h3>Estructura de un programa: setup() y draw()</h3>
+      <p>
+        Un programa de p5.js gira en torno a dos funciones que la biblioteca invoca automáticamente.
+        <code>setup()</code> se ejecuta una sola vez al iniciar y sirve para preparar el lienzo con
+        <code>createCanvas(ancho, alto)</code>, que es la instrucción que crea el elemento
+        <code>&lt;canvas&gt;</code> dentro de la página. <code>draw()</code> se ejecuta en bucle, por omisión
+        sesenta veces por segundo, y es donde vive la animación. Cada pasada de <code>draw()</code> suele
+        comenzar con <code>background()</code>, que borra el cuadro anterior. La variable
+        <code>frameCount</code> cuenta cuántos cuadros se han dibujado, y funciones como
+        <code>noLoop()</code>, <code>loop()</code> y <code>frameRate()</code> permiten detener, reanudar o
+        ajustar el ritmo del bucle.
+      </p>
+      <pre><code>function setup() {
+  createCanvas(400, 400).parent('lienzo');   // crea el canvas dentro del div#lienzo
+}
+
+function draw() {
+  background(135, 206, 235);
+  circle(mouseX, mouseY, 40);                // un círculo que sigue al mouse
+}</code></pre>
+    </section>
+
+    <section id="primitivas">
+      <h3>Coordenadas y formas primitivas</h3>
+      <p>
+        p5.js usa el mismo sistema de coordenadas que el canvas, con el origen arriba a la izquierda. Las
+        formas básicas son <code>point()</code>, <code>line()</code>, <code>rect()</code>,
+        <code>ellipse()</code>, <code>circle()</code>, <code>triangle()</code>, <code>quad()</code>,
+        <code>arc()</code> y las curvas <code>bezier()</code>, además de <code>beginShape()</code>,
+        <code>vertex()</code> y <code>endShape()</code> para polígonos personalizados. Hay un detalle que
+        suele provocar errores: <code>ellipse(x, y, ancho, alto)</code> recibe el centro de la elipse,
+        mientras que <code>rect(x, y, ancho, alto)</code> recibe su esquina superior izquierda, aunque ambos
+        comportamientos pueden cambiarse con <code>ellipseMode()</code> y <code>rectMode()</code>. Los ángulos
+        se expresan en radianes por defecto, para lo cual existen las constantes <code>PI</code>,
+        <code>HALF_PI</code> y <code>TWO_PI</code>.
+      </p>
+    </section>
+
+    <section id="color">
+      <h3>Color y estilo</h3>
+      <p>
+        El estilo en p5.js es un estado global: lo que se establece con <code>fill()</code> (relleno),
+        <code>stroke()</code> (contorno) y <code>strokeWeight()</code> (grosor) se aplica a todas las figuras
+        siguientes hasta que se cambie. Para quitar el relleno o el contorno se usan <code>noFill()</code> y
+        <code>noStroke()</code>. Los colores se pueden dar como un valor de gris, como tres valores RGB, como
+        RGB con transparencia, como texto hexadecimal o, tras llamar a <code>colorMode(HSB)</code>, como matiz,
+        saturación y brillo. Los dibujos de este sitio usan el formato RGB, por ejemplo
+        <code>fill(30, 204, 91)</code> para el verde de la rana. Las funciones <code>color()</code> y
+        <code>lerpColor()</code> permiten guardar un color y mezclar dos de ellos, y el texto se escribe con
+        <code>text()</code>, <code>textSize()</code> y <code>textAlign()</code>.
+      </p>
+    </section>
+
+    <section id="transformaciones">
+      <h3>Transformaciones y la pila de estados</h3>
+      <p>
+        <code>translate()</code>, <code>rotate()</code> y <code>scale()</code> no mueven figuras ya
+        dibujadas: modifican el sistema de coordenadas para todo lo que se dibuje a continuación. Como esos
+        cambios se acumulan, p5.js ofrece <code>push()</code> y <code>pop()</code>, que guardan y restauran
+        el estado (transformaciones y estilos). El patrón habitual consiste en abrir un bloque con
+        <code>push()</code>, trasladar el origen al punto de pivote de la figura, rotarla, dibujarla y cerrar
+        con <code>pop()</code>. El orden importa: trasladar y luego rotar no produce el mismo resultado que
+        rotar y luego trasladar.
+      </p>
+    </section>
+
+    <section id="interactividad">
+      <h3>Interactividad y utilidades matemáticas</h3>
+      <p>
+        p5.js pone a disposición del programa variables del sistema que siempre contienen el estado actual de
+        la entrada: <code>mouseX</code> y <code>mouseY</code> (posición del cursor dentro del lienzo),
+        <code>pmouseX</code> y <code>pmouseY</code> (posición en el cuadro anterior),
+        <code>mouseIsPressed</code>, <code>key</code> y <code>keyIsPressed</code>. También se pueden definir
+        funciones de evento con nombres reservados, como <code>mousePressed()</code>,
+        <code>mouseMoved()</code> o <code>keyPressed()</code>, que la biblioteca llama justo cuando ocurre el
+        suceso. Para trabajar con los valores existen <code>map()</code> (convierte un valor de un intervalo a
+        otro), <code>constrain()</code>, <code>lerp()</code>, <code>dist()</code>, <code>random()</code> y
+        <code>noise()</code>, además de las funciones trigonométricas <code>sin()</code>, <code>cos()</code> y
+        <code>atan2()</code>, indispensables para calcular movimientos y trayectorias.
+      </p>
+    </section>
+
+    <section id="modos">
+      <h3>Modo global y modo instancia</h3>
+      <p>
+        Los dibujos de este sitio usan el modo global, en el que <code>setup()</code> y <code>draw()</code>
+        se declaran directamente como funciones de la página y todas las instrucciones de p5.js están
+        disponibles sin prefijo. Es el modo más sencillo y el más cercano a Khan Academy, pero tiene un
+        inconveniente: contamina el espacio global y solo admite un dibujo por página. El modo instancia
+        resuelve ese problema envolviendo el programa en una función que recibe un objeto, tradicionalmente
+        llamado <code>p</code>, del cual cuelgan todas las instrucciones. Se crea con <code>new p5(sketch)</code>
+        y permite tener varios dibujos independientes en la misma página. La demostración siguiente está
+        escrita en modo instancia.
+      </p>
+      <pre><code>new p5((p) =&gt; {
+  p.setup = () =&gt; {
+    p.createCanvas(480, 260).parent('demo-p5');
+  };
+  p.draw = () =&gt; {
+    p.background(20);
+    p.circle(p.mouseX, p.mouseY, 30);
+  };
+});</code></pre>
+      <div id="demo-p5" class="lienzo" aria-label="Estela de círculos que sigue al mouse"></div>
+      <p class="enlaces"><a href="js/demo-p5.js">Ver el código de la demostración (demo-p5.js)</a></p>
+    </section>
+
+    <section id="relacion-canvas">
+      <h3>Relación entre p5.js y canvas</h3>
+      <p>
+        p5.js no sustituye al elemento <code>&lt;canvas&gt;</code>: lo utiliza. Al llamar a
+        <code>createCanvas()</code>, la biblioteca crea un canvas, obtiene su contexto 2D con
+        <code>getContext('2d')</code> y traduce cada una de sus funciones a llamadas del contexto nativo. Por
+        ejemplo, <code>circle()</code> acaba ejecutando <code>beginPath()</code>, <code>arc()</code>,
+        <code>fill()</code> y <code>stroke()</code>. La biblioteca añade comodidades como el estilo global, el
+        bucle de animación, el ajuste a pantallas de alta densidad y las variables de entrada. Cuando se
+        necesita una función que p5.js no ofrece, la propiedad <code>drawingContext</code> da acceso directo
+        al contexto 2D nativo. Con <code>createCanvas(ancho, alto, WEBGL)</code> la biblioteca cambia al
+        contexto WebGL para trabajar en tres dimensiones.
+      </p>
+    </section>
+
+    <section id="khan-academy">
+      <h3>De Khan Academy a este sitio</h3>
+      <p>
+        El simulador de Khan Academy ofrece un entorno cerrado: el lienzo ya existe, las funciones de dibujo
+        están disponibles y el código se ejecuta con un botón. Para llevar los dibujos al código web estándar
+        fue necesario añadir lo que el simulador hacía de forma implícita: una página HTML con un contenedor
+        para el lienzo, la carga de la biblioteca y una función <code>setup()</code> con
+        <code>createCanvas(400, 400)</code>. Como los cinco dibujos son escenas fijas, no necesitan la función
+        <code>draw()</code>: p5.js ejecuta <code>setup()</code> una sola vez y el dibujo queda en el lienzo.
+      </p>
+      <p>
+        Hay una diferencia que conviene conocer: el fondo por omisión del simulador es blanco, mientras que el de
+        p5.js es gris claro, por lo que en los dibujos que no definían un fondo (la rana, los dientes de conejo
+        y el muñeco de nieve) se agregó <code>background(255)</code>. El resto de las instrucciones, como
+        <code>fill()</code>, <code>ellipse()</code> o <code>rect()</code>, conservan su forma original, lo que
+        demuestra que lo aprendido en el simulador es directamente transferible al entorno real.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Brian Jair Camacho Rodríguez · Proyecto de HTML, CSS y JavaScript · 2026</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/demo-p5.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Día nevado soleado | Canvas y p5.js</title>
+  <meta name="description" content="Paisaje de un día nevado y soleado hecho con p5.js, adaptado desde Khan Academy.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Canvas <span>&amp;</span> p5.js</a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="menu">☰ Menú</button>
+    <nav id="menu" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="dientes-conejo.html">Dientes de conejo</a></li>
+        <li><a href="cena.html">¿Qué hay de cena?</a></li>
+        <li><a href="dia-nevado.html">Día nevado soleado</a></li>
+        <li><a href="muneco-nieve.html">Muñeco de nieve</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="pagina-nevado">
+    <h2>☀️ 4. Día nevado soleado</h2>
+    <p class="lead">Un paisaje completo: cielo azul, pasto, un sol amarillo y un muñeco de nieve.</p>
+
+    <div class="estudio">
+      <figure class="codigo">
+        <figcaption>Código (p5.js)</figcaption>
+<pre><code>function setup() {
+  createCanvas(400, 400).parent('lienzo');
+
+  background(74, 204, 247);
+
+  // The ground
+  fill(51, 219, 48);
+  rect(0, 300, 400, 100);
+
+  // The sun
+  fill(255, 255, 0);
+  ellipse(80, 64, 100, 100);
+
+  // The snowman
+  fill(255, 255, 255);
+  ellipse(200, 300, 150, 150);
+  ellipse(200, 200, 100, 100);
+  ellipse(200, 120, 75, 75);
+}</code></pre>
+      </figure>
+      <div id="lienzo" class="lienzo"></div>
+    </div>
+
+    <section>
+      <h3>Cómo está hecho</h3>
+      <p>
+        Este dibujo combina por primera vez varios elementos en una misma escena, y por eso el orden de las
+        instrucciones es fundamental. <code>background(74, 204, 247)</code> pinta el cielo de azul; después un
+        rectángulo verde de 400 por 100 píxeles, que empieza en la altura 300, forma el suelo. El sol es un
+        círculo amarillo de 100 píxeles en la esquina superior izquierda. Por último se pinta el muñeco con tres
+        círculos blancos de tamaño decreciente (150, 100 y 75 píxeles) cuyos centros están sobre la misma
+        vertical, <code>x = 200</code>. Como el muñeco se dibuja después del suelo, su base queda encima del
+        pasto, que es lo que da la sensación de que está parado sobre la nieve.
+      </p>
+      <p>
+        Los colores se escriben en formato RGB, con tres valores entre 0 y 255 para el rojo, el verde y el azul,
+        y cada llamada a <code>fill()</code> se aplica a todas las figuras siguientes hasta que se cambie. En p5.js
+        solo hizo falta agregar <code>setup()</code> y <code>createCanvas(400, 400)</code>.
+      </p>
+      <p class="enlaces"><a href="js/sketches/dia-nevado.js">Ver el archivo del dibujo (dia-nevado.js)</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Brian Jair Camacho Rodríguez · Proyecto de HTML, CSS y JavaScript · 2026</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sketches/dia-nevado.js"></script>
+</body>
+</html>

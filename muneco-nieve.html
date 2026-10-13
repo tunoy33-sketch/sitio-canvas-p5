@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muñeco de nieve | Canvas y p5.js</title>
+  <meta name="description" content="Muñeco de nieve dibujado con tres elipses en p5.js, adaptado desde Khan Academy.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Canvas <span>&amp;</span> p5.js</a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="menu">☰ Menú</button>
+    <nav id="menu" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="dientes-conejo.html">Dientes de conejo</a></li>
+        <li><a href="cena.html">¿Qué hay de cena?</a></li>
+        <li><a href="dia-nevado.html">Día nevado soleado</a></li>
+        <li><a href="muneco-nieve.html">Muñeco de nieve</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="pagina-muneco">
+    <h2>⛄ 5. Muñeco de nieve</h2>
+    <p class="lead">El dibujo más sencillo de la serie: tres elipses apiladas forman un muñeco de nieve.</p>
+
+    <div class="estudio">
+      <figure class="codigo">
+        <figcaption>Código (p5.js)</figcaption>
+<pre><code>function setup() {
+  createCanvas(400, 400).parent('lienzo');
+  background(255);
+
+  ellipse(200, 300, 150, 130);
+  ellipse(200, 225, 115, 100);
+  ellipse(200, 160, 90, 85);
+}</code></pre>
+      </figure>
+      <div id="lienzo" class="lienzo"></div>
+    </div>
+
+    <section>
+      <h3>Cómo está hecho</h3>
+      <p>
+        El muñeco son tres llamadas a <code>ellipse(x, y, ancho, alto)</code> con el mismo valor horizontal,
+        200, de modo que los tres cuerpos quedan alineados en el centro del lienzo. Lo que cambia es la altura del
+        centro (300, 225 y 160) y el tamaño: la esfera de abajo mide 150 por 130, la del medio 115 por 100 y la
+        cabeza 90 por 85. Al ser elipses y no círculos perfectos, su altura es un poco menor que su ancho, lo que
+        les da un aspecto aplastado, como si la nieve se hubiera compactado. Las figuras se superponen porque la
+        distancia entre centros es menor que la suma de sus radios; como cada una se pinta con el relleno blanco
+        predeterminado, la que se dibuja después tapa el contorno de la anterior en la zona de contacto.
+      </p>
+      <p>
+        Como no se usa <code>fill()</code> ni <code>stroke()</code>, el dibujo conserva el estilo por omisión de
+        p5.js: relleno blanco y contorno negro de un píxel. En el paso a p5.js se agregó
+        <code>background(255)</code> para que el fondo siga siendo blanco.
+      </p>
+      <p class="enlaces"><a href="js/sketches/muneco-nieve.js">Ver el archivo del dibujo (muneco-nieve.js)</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Brian Jair Camacho Rodríguez · Proyecto de HTML, CSS y JavaScript · 2026</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sketches/muneco-nieve.js"></script>
+</body>
+</html>

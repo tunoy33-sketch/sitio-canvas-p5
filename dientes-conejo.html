@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dientes de conejo | Canvas y p5.js</title>
+  <meta name="description" content="Dibujo de un conejo con dientes hecho con p5.js, adaptado desde Khan Academy.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Canvas <span>&amp;</span> p5.js</a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="menu">☰ Menú</button>
+    <nav id="menu" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="dientes-conejo.html">Dientes de conejo</a></li>
+        <li><a href="cena.html">¿Qué hay de cena?</a></li>
+        <li><a href="dia-nevado.html">Día nevado soleado</a></li>
+        <li><a href="muneco-nieve.html">Muñeco de nieve</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="pagina-conejo">
+    <h2>🐰 2. Dientes de conejo</h2>
+    <p class="lead">Un conejo de orejas largas y dientes prominentes, dibujado con elipses, una línea y dos rectángulos.</p>
+
+    <div class="estudio">
+      <figure class="codigo">
+        <figcaption>Código (p5.js)</figcaption>
+<pre><code>function setup() {
+  createCanvas(400, 400).parent('lienzo');
+  background(255);
+
+  var eyze = 43;
+  var tooth = 50;
+
+  ellipse(150, 70, 32, 113); // left ear
+  ellipse(240, 70, 32, 113); // right ear
+
+  ellipse(200, 170, 150, 150); // face
+
+  fill(0, 0, 0);
+  ellipse(170, 150, eyze, eyze); // left eye
+  ellipse(230, 150, eyze, eyze); // right eye
+
+  line(150, 200, 250, 200); // mouth
+
+  noFill();
+
+  rect(185, 200, 15, tooth); // left tooth
+  rect(200, 200, 15, tooth); // right tooth
+}</code></pre>
+      </figure>
+      <div id="lienzo" class="lienzo"></div>
+    </div>
+
+    <section>
+      <h3>Cómo está hecho</h3>
+      <p>
+        Este dibujo introduce las variables como forma de dar nombre a una medida que se repite:
+        <code>eyze</code> controla el diámetro de los dos ojos y <code>tooth</code> la altura de los dientes,
+        así que cambiar un solo valor modifica ambas figuras a la vez. Las orejas son dos elipses altas y
+        estrechas (32 por 113) y la cara es un círculo de 150 píxeles; como todavía no se ha llamado a
+        <code>fill()</code>, se pintan con el relleno blanco y el contorno negro predeterminados. Después
+        <code>fill(0, 0, 0)</code> pinta los ojos de negro y <code>line()</code> traza la boca. Antes de los
+        dientes se llama a <code>noFill()</code>, por lo que los dos rectángulos conservan solo su contorno y
+        dejan ver el blanco de la cara que hay detrás.
+      </p>
+      <p>
+        Igual que en la rana, la única adaptación al pasar a p5.js fue envolver el código en
+        <code>setup()</code>, crear el lienzo con <code>createCanvas(400, 400)</code> y agregar
+        <code>background(255)</code> para obtener el fondo blanco de Khan Academy.
+      </p>
+      <p class="enlaces"><a href="js/sketches/dientes-conejo.js">Ver el archivo del dibujo (dientes-conejo.js)</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Brian Jair Camacho Rodríguez · Proyecto de HTML, CSS y JavaScript · 2026</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sketches/dientes-conejo.js"></script>
+</body>
+</html>

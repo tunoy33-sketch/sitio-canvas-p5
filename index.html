@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio | Canvas y p5.js</title>
+  <meta name="description" content="Sitio web con dibujos interactivos hechos con canvas y p5.js, migrados desde Khan Academy.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Canvas <span>&amp;</span> p5.js</a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="menu">☰ Menú</button>
+    <nav id="menu" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="dientes-conejo.html">Dientes de conejo</a></li>
+        <li><a href="cena.html">¿Qué hay de cena?</a></li>
+        <li><a href="dia-nevado.html">Día nevado soleado</a></li>
+        <li><a href="muneco-nieve.html">Muñeco de nieve</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="pagina-inicio">
+    <h2>Del simulador de Khan Academy al código web real</h2>
+    <p class="lead">
+      Este sitio reúne los cinco dibujos que realicé en los retos de Khan Academy, ahora reescritos con
+      código web estándar: HTML para la estructura, CSS para el diseño y JavaScript con la biblioteca
+      p5.js para el dibujo y la interacción.
+    </p>
+
+    <h3>Galería de dibujos</h3>
+    <p>
+      Cada dibujo vive en su propia página y se renderiza dentro de una etiqueta
+      <code>&lt;canvas&gt;</code>, con su código p5.js al lado, como en el editor de Khan Academy.
+    </p>
+
+    <div class="cuadricula">
+      <article class="tarjeta">
+        <h3>🐸 1. Rana</h3>
+        <p>Una rana de boca grande hecha con elipses y dos cuadrados.</p>
+        <a href="rana.html">Ver dibujo</a>
+      </article>
+      <article class="tarjeta">
+        <h3>🐰 2. Dientes de conejo</h3>
+        <p>Un conejo de orejas largas y dientes prominentes.</p>
+        <a href="dientes-conejo.html">Ver dibujo</a>
+      </article>
+      <article class="tarjeta">
+        <h3>🍽️ 3. ¿Qué hay de cena?</h3>
+        <p>Una rebanada de pizza de pepperoni sobre un plato y una mesa de madera.</p>
+        <a href="cena.html">Ver dibujo</a>
+      </article>
+      <article class="tarjeta">
+        <h3>☀️ 4. Día nevado soleado</h3>
+        <p>Un paisaje con cielo, pasto, sol y un muñeco de nieve.</p>
+        <a href="dia-nevado.html">Ver dibujo</a>
+      </article>
+      <article class="tarjeta">
+        <h3>⛄ 5. Muñeco de nieve</h3>
+        <p>Tres elipses apiladas que forman un muñeco de nieve.</p>
+        <a href="muneco-nieve.html">Ver dibujo</a>
+      </article>
+    </div>
+
+    <h3>Sección informativa</h3>
+    <div class="cuadricula">
+      <article class="tarjeta teoria">
+        <h3>La etiqueta canvas</h3>
+        <p>Qué es, cómo funciona el contexto de renderizado 2D y qué otros contextos existen.</p>
+        <a href="teoria-canvas.html">Leer teoría</a>
+      </article>
+      <article class="tarjeta teoria">
+        <h3>Fundamentos de p5.js</h3>
+        <p>El ciclo setup/draw, las primitivas, el color, las transformaciones y la interactividad.</p>
+        <a href="teoria-p5.html">Leer teoría</a>
+      </article>
+      <article class="tarjeta herramienta">
+        <h3>DOM Inspector</h3>
+        <p>El árbol del DOM de cada página del sitio, dibujado de forma gráfica.</p>
+        <a href="dom-inspector.html">Abrir inspector</a>
+      </article>
+    </div>
+
+    <h3>Cómo está organizado el proyecto</h3>
+    <p>
+      El código fuente se divide en tres tipos de archivo. Las páginas HTML están en la raíz del proyecto,
+      la hoja de estilos compartida está en la carpeta <code>css</code> y los scripts están en la carpeta
+      <code>js</code>, donde cada dibujo tiene su propio archivo dentro de <code>js/sketches</code>. Esa
+      separación permite que el menú, el diseño y la lógica de dibujo se modifiquen de forma independiente.
+    </p>
+  </main>
+
+  <footer>
+    <p>Brian Jair Camacho Rodríguez · Proyecto de HTML, CSS y JavaScript · 2026</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

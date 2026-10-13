@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teoría: canvas | Canvas y p5.js</title>
+  <meta name="description" content="Explicación de la etiqueta canvas de HTML5 y de su contexto de renderizado 2D.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Canvas <span>&amp;</span> p5.js</a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="menu">☰ Menú</button>
+    <nav id="menu" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="dientes-conejo.html">Dientes de conejo</a></li>
+        <li><a href="cena.html">¿Qué hay de cena?</a></li>
+        <li><a href="dia-nevado.html">Día nevado soleado</a></li>
+        <li><a href="muneco-nieve.html">Muñeco de nieve</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="pagina-teoria-canvas">
+    <h2>La etiqueta &lt;canvas&gt; y el contexto 2D</h2>
+    <p class="lead">Cómo el navegador permite dibujar píxeles directamente desde JavaScript.</p>
+
+    <section id="que-es">
+      <h3>¿Qué es la etiqueta canvas?</h3>
+      <p>
+        La etiqueta <code>&lt;canvas&gt;</code> es un elemento de HTML5 que reserva en la página un rectángulo
+        de píxeles sobre el cual un programa de JavaScript puede dibujar. A diferencia de elementos como
+        <code>&lt;div&gt;</code> o <code>&lt;svg&gt;</code>, las figuras que se pintan dentro de un canvas no
+        se convierten en nodos del DOM: el navegador solo conserva un mapa de bits y no recuerda qué formas lo
+        componen. Por eso se dice que canvas funciona en «modo inmediato». Cada instrucción de dibujo pinta
+        píxeles en el momento en que se ejecuta y, si se quiere mover o borrar algo, hay que volver a pintar la
+        escena. Es exactamente lo que hace la función <code>draw()</code> de p5.js en cada cuadro de una
+        animación.
+      </p>
+      <p>
+        Esta característica explica sus ventajas y sus límites. Dibujar miles de elementos es muy rápido
+        porque no hay un árbol de objetos que mantener, lo que hace al canvas ideal para juegos, simulaciones,
+        visualizaciones y arte generativo. A cambio, un canvas no ofrece por sí mismo detección de clics sobre
+        una figura concreta, ni estilos CSS por figura, ni accesibilidad nativa para su contenido: todo eso debe
+        programarse manualmente.
+      </p>
+    </section>
+
+    <section id="atributos">
+      <h3>Atributos y sistema de coordenadas</h3>
+      <p>
+        Un canvas se declara con los atributos <code>width</code> y <code>height</code>, que fijan la
+        resolución interna del lienzo en píxeles (300 por 150 si se omiten). Conviene no confundir esa
+        resolución con el tamaño visible en pantalla, que controla CSS: si una hoja de estilos hace el canvas
+        más ancho de lo que indica su atributo <code>width</code>, el navegador escala el mapa de bits y la
+        imagen se ve borrosa. Entre las etiquetas de apertura y de cierre puede escribirse un texto alternativo
+        que verán los lectores de pantalla y los navegadores sin soporte.
+      </p>
+      <pre><code>&lt;canvas id="lienzo" width="400" height="400"&gt;
+  Dibujo de una rana sobre un nenúfar.
+&lt;/canvas&gt;</code></pre>
+      <p>
+        El sistema de coordenadas del canvas tiene su origen (0, 0) en la esquina superior izquierda. El eje
+        x crece hacia la derecha y el eje y crece hacia abajo, al contrario que en un plano cartesiano de
+        matemáticas. Este es el mismo sistema que utiliza p5.js y el simulador de Khan Academy, de modo que las
+        coordenadas de los dibujos originales se conservan sin cambios.
+      </p>
+    </section>
+
+    <section id="contexto-2d">
+      <h3>El contexto de renderizado 2D</h3>
+      <p>
+        El elemento <code>&lt;canvas&gt;</code> por sí solo no dibuja nada: es únicamente la superficie. Para
+        dibujar hay que pedirle un «contexto de renderizado», que es el objeto que contiene la API de dibujo.
+        Eso se hace con el método <code>getContext()</code>, indicando el tipo de contexto deseado. Al pedir
+        <code>'2d'</code> se obtiene un objeto <code>CanvasRenderingContext2D</code>, tradicionalmente guardado
+        en una variable llamada <code>ctx</code>. Un mismo canvas solo puede tener un tipo de contexto: una vez
+        que se solicitó el contexto 2D, pedir uno de WebGL devuelve <code>null</code>.
+      </p>
+      <pre><code>const lienzo = document.getElementById('lienzo');
+const ctx = lienzo.getContext('2d');
+
+ctx.fillStyle = 'seagreen';
+ctx.fillRect(50, 50, 120, 80);   // rectángulo relleno en (50, 50)</code></pre>
+      <p>
+        La API del contexto 2D se organiza en varias familias de operaciones. Los rectángulos se pintan con
+        <code>fillRect()</code>, <code>strokeRect()</code> y <code>clearRect()</code>. Las formas arbitrarias
+        se construyen como trazados: se llama a <code>beginPath()</code>, se añaden segmentos con
+        <code>moveTo()</code>, <code>lineTo()</code>, <code>arc()</code> o <code>bezierCurveTo()</code>, y
+        finalmente se rellena con <code>fill()</code> o se dibuja el contorno con <code>stroke()</code>. El
+        aspecto lo determinan propiedades como <code>fillStyle</code>, <code>strokeStyle</code>,
+        <code>lineWidth</code> y <code>globalAlpha</code>, y los degradados se crean con
+        <code>createLinearGradient()</code> y <code>createRadialGradient()</code>. También existen el texto
+        (<code>fillText()</code> y la propiedad <code>font</code>), las imágenes (<code>drawImage()</code>) y
+        las transformaciones (<code>translate()</code>, <code>rotate()</code> y <code>scale()</code>), que se
+        pueden aislar guardando y restaurando el estado del contexto con <code>save()</code> y
+        <code>restore()</code>. Esas dos últimas son el equivalente directo de <code>push()</code> y
+        <code>pop()</code> en p5.js.
+      </p>
+      <pre><code>ctx.beginPath();
+ctx.arc(200, 200, 60, 0, Math.PI * 2);  // círculo de radio 60
+ctx.fillStyle = '#60b5f5';
+ctx.fill();
+ctx.lineWidth = 4;
+ctx.strokeStyle = '#0f172a';
+ctx.stroke();</code></pre>
+    </section>
+
+    <section id="animacion">
+      <h3>Animación con requestAnimationFrame</h3>
+      <p>
+        Como el canvas no recuerda lo que contiene, una animación consiste en repetir un ciclo: borrar el
+        cuadro anterior, actualizar las posiciones y volver a dibujar. Para repetirlo en el momento adecuado se
+        usa <code>requestAnimationFrame()</code>, que pide al navegador ejecutar una función justo antes del
+        siguiente refresco de pantalla, normalmente unas sesenta veces por segundo, y que se pausa sola cuando
+        la pestaña no está visible. La demostración de abajo está escrita únicamente con la API nativa, sin
+        p5.js, y es muy parecida a lo que hace por dentro la función <code>draw()</code> de esa biblioteca.
+      </p>
+      <div class="lienzo">
+        <canvas id="demo-canvas" width="480" height="260" aria-label="Pelota rebotando dentro de un recuadro">
+          Una pelota azul que rebota dentro de un recuadro.
+        </canvas>
+      </div>
+      <p class="enlaces"><a href="js/demo-canvas.js">Ver el código de la demostración (demo-canvas.js)</a></p>
+    </section>
+
+    <section id="otros-contextos">
+      <h3>Otros contextos de renderizado</h3>
+      <p>
+        El contexto 2D no es el único que admite un canvas. Con <code>getContext('webgl')</code> o
+        <code>getContext('webgl2')</code> se accede a la tarjeta gráfica mediante una API basada en OpenGL ES,
+        pensada para gráficos tridimensionales y programas sombreadores escritos en GLSL. El contexto
+        <code>'bitmaprenderer'</code> se limita a mostrar imágenes ya procesadas en forma de
+        <code>ImageBitmap</code>, y el más reciente, <code>'webgpu'</code>, expone la API WebGPU para cálculo y
+        gráficos de bajo nivel. Existe además <code>OffscreenCanvas</code>, una variante que permite dibujar en
+        un Web Worker sin bloquear la interfaz. Este proyecto utiliza únicamente el contexto 2D, que es el más
+        sencillo y el que corresponde a los dibujos de Khan Academy.
+      </p>
+    </section>
+
+    <section id="buenas-practicas">
+      <h3>Buenas prácticas</h3>
+      <p>
+        En pantallas de alta densidad, un canvas dibujado a su resolución nominal puede verse algo borroso; la
+        solución habitual es multiplicar <code>width</code> y <code>height</code> por
+        <code>window.devicePixelRatio</code> y reducir el tamaño visible con CSS (p5.js hace este ajuste de
+        forma automática). Con respecto a la accesibilidad, conviene añadir siempre un texto alternativo
+        dentro de la etiqueta o un atributo <code>aria-label</code> que describa el dibujo. En cuanto al
+        rendimiento, es recomendable no crear objetos nuevos dentro del ciclo de animación, dibujar una sola
+        vez los fondos que no cambian y apilar varios canvas cuando una parte de la escena se actualiza mucho
+        más a menudo que otra. Los cinco dibujos de este sitio son escenas estáticas, así que se pintan una
+        única vez y no necesitan ningún ciclo de animación.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Brian Jair Camacho Rodríguez · Proyecto de HTML, CSS y JavaScript · 2026</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/demo-canvas.js"></script>
+</body>
+</html>

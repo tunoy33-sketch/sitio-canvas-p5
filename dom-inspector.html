@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Inspector | Canvas y p5.js</title>
+  <meta name="description" content="Visualización gráfica del árbol del DOM de cada página del sitio.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Canvas <span>&amp;</span> p5.js</a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="menu">☰ Menú</button>
+    <nav id="menu" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="dientes-conejo.html">Dientes de conejo</a></li>
+        <li><a href="cena.html">¿Qué hay de cena?</a></li>
+        <li><a href="dia-nevado.html">Día nevado soleado</a></li>
+        <li><a href="muneco-nieve.html">Muñeco de nieve</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="pagina-inspector">
+    <h2>DOM Inspector</h2>
+    <p class="lead">
+      El árbol del DOM de cada página del sitio, dibujado desde el nodo raíz <code>&lt;html&gt;</code> hasta
+      sus elementos más profundos. Elige una página y haz clic en un nodo con el botón «+» para desplegar sus
+      hijos.
+    </p>
+
+    <div id="pestanas" class="pestanas" role="group" aria-label="Páginas del sitio"></div>
+
+    <div class="controles">
+      <button type="button" id="btn-expandir">Expandir todo</button>
+      <button type="button" id="btn-contraer">Contraer</button>
+      <button type="button" id="btn-inicial">Vista inicial</button>
+      <button type="button" id="btn-tamano">Ver tamaño real</button>
+      <div class="leyenda" aria-hidden="true">
+        <span>Elemento</span>
+        <span class="l-sem">Contenedor semántico</span>
+        <span class="l-cv">Canvas</span>
+      </div>
+    </div>
+
+    <div id="arbol" class="arbol">
+      <noscript>Este inspector necesita JavaScript para dibujar el árbol.</noscript>
+    </div>
+    <p id="estado" class="estado" role="status"></p>
+
+    <section>
+      <h3>Cómo funciona</h3>
+      <p>
+        Al elegir una página, el inspector la descarga con <code>fetch()</code> y convierte su código HTML en
+        un documento con <code>DOMParser</code>, el mismo mecanismo con el que el navegador construye el DOM
+        real. Después recorre de forma recursiva la propiedad <code>children</code> de cada elemento, calcula
+        la posición de cada nodo para que los padres queden centrados sobre sus hijos y dibuja el resultado
+        como un gráfico SVG. Los nodos de texto y los comentarios se omiten para que se vea solo la jerarquía
+        de etiquetas. Como el inspector usa <code>fetch()</code>, funciona cuando el sitio está publicado
+        (por ejemplo en GitHub Pages) o se sirve con un servidor local, pero no al abrir el archivo
+        directamente con doble clic.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Brian Jair Camacho Rodríguez · Proyecto de HTML, CSS y JavaScript · 2026</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/dom-inspector.js"></script>
+</body>
+</html>

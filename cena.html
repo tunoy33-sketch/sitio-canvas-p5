@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Qué hay de cena? | Canvas y p5.js</title>
+  <meta name="description" content="Dibujo de un plato con una rebanada de pizza hecho con p5.js, adaptado desde Khan Academy.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Canvas <span>&amp;</span> p5.js</a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="menu">☰ Menú</button>
+    <nav id="menu" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="rana.html">Rana</a></li>
+        <li><a href="dientes-conejo.html">Dientes de conejo</a></li>
+        <li><a href="cena.html">¿Qué hay de cena?</a></li>
+        <li><a href="dia-nevado.html">Día nevado soleado</a></li>
+        <li><a href="muneco-nieve.html">Muñeco de nieve</a></li>
+        <li><a href="teoria-canvas.html">Teoría: canvas</a></li>
+        <li><a href="teoria-p5.html">Teoría: p5.js</a></li>
+        <li><a href="dom-inspector.html">DOM Inspector</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="pagina-cena">
+    <h2>🍽️ 3. ¿Qué hay de cena?</h2>
+    <p class="lead">Una mesa de madera con un plato y una rebanada de pizza de pepperoni, vista desde arriba.</p>
+
+    <div class="estudio">
+      <figure class="codigo">
+        <figcaption>Código (p5.js)</figcaption>
+<pre><code>function setup() {
+  createCanvas(400, 400).parent('lienzo');
+
+  background(186, 145, 20); // wooden table
+  ellipse(200, 200, 350, 350); // plate
+  ellipse(200, 200, 300, 300);
+
+  //posicion
+  var pizzax = 200;
+  var pizzay = 150;
+
+  fill(255, 242, 0);
+  triangle(pizzax, pizzay, pizzax + 80, pizzay + 130, pizzax - 80, pizzay + 130);
+
+  var x = 20;
+  fill(240, 76, 0);
+  ellipse(pizzax, pizzay + 30, x, x);
+  ellipse(pizzax + 20, pizzay + 50, x, x);
+  ellipse(pizzax - 30, pizzay + 80, x, x);
+  ellipse(pizzax, pizzay + 100, x, x);
+  ellipse(pizzax + 30, pizzay + 90, x, x);
+  ellipse(pizzax - 20, pizzay + 110, x, x);
+  ellipse(pizzax + 50, pizzay + 100, x, x);
+  ellipse(pizzax + 20, pizzay + 120, x, x);
+}</code></pre>
+      </figure>
+      <div id="lienzo" class="lienzo"></div>
+    </div>
+
+    <section>
+      <h3>Cómo está hecho</h3>
+      <p>
+        La escena se construye por capas, de atrás hacia adelante. Primero <code>background()</code> pinta la
+        mesa con un color café dorado; luego dos elipses concéntricas de 350 y 300 píxeles forman el borde y el
+        fondo del plato, que se ven blancas con contorno negro porque ese es el estilo predeterminado. La rebanada
+        de pizza es un triángulo amarillo cuyo vértice superior está en las variables <code>pizzax</code> y
+        <code>pizzay</code>; los otros dos vértices se calculan sumando y restando 80 a la coordenada horizontal
+        y sumando 130 a la vertical, de modo que la rebanada se puede mover cambiando solo esas dos variables.
+      </p>
+      <p>
+        Los pepperonis son ocho elipses naranjas del mismo tamaño, guardado en la variable <code>x</code> (20
+        píxeles). Cada una se coloca con un desplazamiento respecto al mismo punto de referencia, como
+        <code>pizzax + 20</code> y <code>pizzay + 50</code>, lo que mantiene todas dentro del triángulo aunque
+        cambie su posición. La adaptación a p5.js consistió en agregar <code>setup()</code> y
+        <code>createCanvas(400, 400)</code>; este dibujo no necesita <code>background(255)</code> porque ya define
+        su propio fondo.
+      </p>
+      <p class="enlaces"><a href="js/sketches/cena.js">Ver el archivo del dibujo (cena.js)</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Brian Jair Camacho Rodríguez · Proyecto de HTML, CSS y JavaScript · 2026</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sketches/cena.js"></script>
+</body>
+</html>
