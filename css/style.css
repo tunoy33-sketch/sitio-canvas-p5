@@ -1,0 +1,463 @@
+/* ===== Variables ===== */
+:root {
+  --bg: #0f172a;
+  --bg-2: #0b1222;
+  --panel: #1e293b;
+  --line: #64748b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #60b5f5;
+  --semantic: #a78bfa;
+  --canvas: #34d399;
+  --radius: 14px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--accent);
+}
+
+code,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+code {
+  background: var(--panel);
+  padding: 0.1em 0.4em;
+  border-radius: 6px;
+  font-size: 0.92em;
+}
+
+pre {
+  background: var(--bg-2);
+  border: 1px solid var(--panel);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* ===== Encabezado y navegación ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.5rem;
+  padding: 0.8rem 1.25rem;
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--panel);
+}
+
+.brand {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.brand span {
+  color: var(--accent);
+}
+
+.menu-toggle {
+  display: none;
+  margin-left: auto;
+  padding: 0.4rem 0.9rem;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  font: inherit;
+  cursor: pointer;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+nav a {
+  display: block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  border-color: var(--accent);
+}
+
+nav a[aria-current="page"] {
+  background: var(--accent);
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* ===== Contenido ===== */
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2.2rem 1.25rem 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem;
+  color: #fff;
+}
+
+h3 {
+  margin: 2.2rem 0 0.4rem;
+  color: #fff;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.lienzo {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.lienzo canvas {
+  max-width: 100%;
+  height: auto !important;
+  border-radius: var(--radius);
+  border: 2px solid var(--accent);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+.enlaces {
+  color: var(--muted);
+}
+
+/* Código a un lado y dibujo al otro, como en el editor de Khan Academy */
+.estudio {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: 1.2rem;
+  align-items: start;
+  margin: 1.5rem 0;
+}
+
+.estudio .lienzo {
+  margin: 0;
+}
+
+.codigo {
+  margin: 0;
+}
+
+.codigo figcaption {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+
+.codigo pre {
+  margin: 0;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 960px) {
+  .estudio {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .estudio .lienzo {
+    order: -1;
+  }
+}
+
+/* ===== Tarjetas del inicio ===== */
+.cuadricula {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.tarjeta {
+  background: var(--panel);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(96, 181, 245, 0.25);
+}
+
+.tarjeta h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.15rem;
+}
+
+.tarjeta p {
+  margin: 0 0 0.6rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.tarjeta.teoria {
+  border-color: var(--semantic);
+}
+
+.tarjeta.herramienta {
+  border-color: var(--canvas);
+}
+
+/* ===== DOM Inspector ===== */
+#pagina-inspector {
+  max-width: 1500px;
+}
+
+#pagina-inspector > p,
+#pagina-inspector > section {
+  max-width: 980px;
+}
+
+.pestanas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1rem 0;
+}
+
+.pestanas button,
+.controles button {
+  padding: 0.35rem 0.9rem;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.pestanas button:hover,
+.controles button:hover {
+  border-color: var(--accent);
+}
+
+.pestanas button[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.leyenda span::before {
+  content: "";
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 0.4em;
+  border-radius: 3px;
+  border: 2px solid var(--accent);
+  vertical-align: -0.1em;
+}
+
+.leyenda .l-sem::before {
+  border-color: var(--semantic);
+}
+
+.leyenda .l-cv::before {
+  border-color: var(--canvas);
+}
+
+.arbol {
+  overflow: auto;
+  background: var(--bg-2);
+  border: 1px solid var(--panel);
+  border-radius: 16px;
+  padding: 0.5rem;
+  min-height: 160px;
+}
+
+.arbol svg {
+  display: block;
+  margin: 0 auto;
+}
+
+/* En tamaño real el árbol puede desbordar: se alinea a la izquierda y se desplaza con scroll */
+.arbol.real svg {
+  margin: 0;
+}
+
+.arbol .linea {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 2.5;
+}
+
+.nodo rect {
+  fill: var(--panel);
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.nodo.sem rect {
+  stroke: var(--semantic);
+}
+
+.nodo.cv rect {
+  stroke: var(--canvas);
+}
+
+.nodo.con-hijos {
+  cursor: pointer;
+}
+
+.nodo.con-hijos:hover rect,
+.nodo:focus-visible rect {
+  fill: #27364f;
+  outline: none;
+}
+
+.nodo .tag {
+  font: 700 15px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  fill: #fff;
+  text-anchor: middle;
+}
+
+.nodo .sub {
+  font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  fill: var(--muted);
+  text-anchor: middle;
+}
+
+.nodo .toggle circle {
+  fill: var(--bg);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.nodo .toggle text {
+  font: 700 13px system-ui, sans-serif;
+  fill: var(--accent);
+  text-anchor: middle;
+}
+
+.estado {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0.6rem;
+}
+
+/* ===== Tablas y notas ===== */
+.nota {
+  border-left: 4px solid var(--accent);
+  background: var(--panel);
+  padding: 0.7rem 1rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--muted);
+}
+
+/* ===== Pie de página ===== */
+footer {
+  text-align: center;
+  padding: 1.4rem 1rem;
+  border-top: 1px solid var(--panel);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 800px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  nav {
+    display: none;
+    width: 100%;
+  }
+
+  nav.abierto {
+    display: block;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  .leyenda {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .tarjeta {
+    transition: none;
+  }
+}
